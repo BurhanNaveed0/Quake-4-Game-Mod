@@ -11002,6 +11002,11 @@ create the renderView for the current tic
 ==================
 */
 void idPlayer::CalculateRenderView( void ) {
+	// BURHAN BEGIN
+	// FORCE THIRD PERSON
+	pm_thirdPerson.SetBool(true);
+	// BURHAN END
+
 	int i;
 	float range;
 
