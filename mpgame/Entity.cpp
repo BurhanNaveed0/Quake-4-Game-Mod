@@ -1264,7 +1264,7 @@ void idEntity::SetModel( const char *modelname ) {
 	FreeModelDef();
 
 	renderEntity.hModel = renderModelManager->FindModel( modelname );
-
+	
 	if ( renderEntity.hModel ) {
 		renderEntity.hModel->Reset();
 	}

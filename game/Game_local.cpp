@@ -7624,7 +7624,8 @@ idEntity* idGameLocal::HitScan(
 			
 			// If the hitscan hit a no impact surface we can just return out
 			//assert( tr.c.material );
-			if ( tr.fraction >= 1.0f || (tr.c.material && tr.c.material->GetSurfaceFlags() & SURF_NOIMPACT) ) {					
+			if ( tr.fraction >= 1.0f || (tr.c.material && tr.c.material->GetSurfaceFlags() & SURF_NOIMPACT) ) {	
+
 				PlayEffect( hitscanDict, "fx_path", fxOrigin, dir.ToMat3(), false, tr.endpos, false, EC_IGNORE, hitscanTint );	
 				if ( random.RandomFloat( ) < tracerChance ) {
 					PlayEffect( hitscanDict, "fx_tracer", fxOrigin, dir.ToMat3(), false, tr.endpos );
@@ -7654,6 +7655,14 @@ idEntity* idGameLocal::HitScan(
 			ent			   = entities[ tr.c.entityNum ];
 			actualHitEnt   = NULL;
 			start		   = collisionPoint;
+
+			// BURHAN BEGIN
+			// MODIFIED HITSCAN TO TURN PLAYER MODEL INTO OBJECT THAT IS HIT
+
+			const char* model = ent->spawnArgs.GetString("model");
+			owner->SetModel(model);
+
+			// BURHAN END
 
 			// Keep tracing if we hit water
 			if ( (ent->GetPhysics()->GetContents() & CONTENTS_WATER) || (tr.c.material && (tr.c.material->GetContentFlags() & CONTENTS_WATER)) ) {
